@@ -40,6 +40,7 @@
   /* top bar: ascii face + small label */
   header.bar{display:flex;justify-content:space-between;align-items:flex-start;padding:24px 0 0;}
   .face{font-family:'Courier New',monospace;font-size:15px;color:var(--plot);letter-spacing:0.05em;}
+  .face{white-space:nowrap;}
   .barnote{font-family:'Archivo Narrow',sans-serif;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--grey);text-align:right;line-height:1.6;}
 
   /* ===== HERO ===== */
@@ -164,7 +165,7 @@
 <div class="wrap">
 
   <header class="bar">
-    <div class="face">[ °□° ]</div>
+    <div class="face" aria-label="Post-Industrial School">[ <span id="kao">°□°</span> ]</div>
     <div class="barnote">A Research Program<br/>Media &amp; Culture After<br/>the Industrial Order</div>
   </header>
 
@@ -328,6 +329,13 @@
     document.addEventListener('mouseup',up);document.addEventListener('touchend',up);
     w.addEventListener('mousedown',function(){bringFront(w);});
   });
+})();
+
+(function(){
+  var el=document.getElementById('kao'); if(!el) return;
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var faces=['°□°','(╯°□°)╯ ┻━┻','┬─┬ノ(°_°ノ)','•_•','(•_•)>⌐■-■','(⌐■_■)','¯\\_(ツ)_/¯','¬_¬','¬‿¬','o_O','⊙_☉','╥_╥','≧▽≦','×_×','・ω・','•_•','-_-','˘ω˘'];
+  var i=0; setInterval(function(){i=(i+1)%faces.length; el.textContent=faces[i];},1100);
 })();
 </script>
 </body></html>
