@@ -181,7 +181,7 @@
         <p class="ann">a culture that can no longer imagine its future recycles its past instead.</p>
         <div class="folder-row">
           <div class="folder" id="f-contact">
-            <div class="ico"><svg viewBox="0 0 78 60"><path d="M3 9 a4 4 0 0 1 4-4 h22 l6 6 h36 a4 4 0 0 1 4 4 v36 a4 4 0 0 1-4 4 H7 a4 4 0 0 1-4-4 Z" fill="#5BA8F2"/><path d="M3 15 h72 v32 a4 4 0 0 1-4 4 H7 a4 4 0 0 1-4-4 Z" fill="#7CC0FA"/></svg></div><div class="lbl">Contact</div><div class="cnt">3 items</div>
+            <div class="ico"><svg viewBox="0 0 78 60"><path d="M3 9 a4 4 0 0 1 4-4 h22 l6 6 h36 a4 4 0 0 1 4 4 v36 a4 4 0 0 1-4 4 H7 a4 4 0 0 1-4-4 Z" fill="#5BA8F2"/><path d="M3 15 h72 v32 a4 4 0 0 1-4 4 H7 a4 4 0 0 1-4-4 Z" fill="#7CC0FA"/></svg></div><div class="lbl">Contact</div><div class="cnt">4 items</div>
           </div>
           <div class="folder" id="f-agenda">
             <div class="ico"><svg viewBox="0 0 78 60"><path d="M3 9 a4 4 0 0 1 4-4 h22 l6 6 h36 a4 4 0 0 1 4 4 v36 a4 4 0 0 1-4 4 H7 a4 4 0 0 1-4-4 Z" fill="#5BA8F2"/><path d="M3 15 h72 v32 a4 4 0 0 1-4 4 H7 a4 4 0 0 1-4-4 Z" fill="#7CC0FA"/></svg></div><div class="lbl">Agenda</div><div class="cnt">2 items</div>
@@ -300,6 +300,7 @@
   <div class="content">
     <h4>Get in touch</h4>
     <div class="win-link"><span class="k"><a href="#" id="mail-link" data-u="carson" data-d="understandingdigitalculture.com">Send a message</a></span><span class="v">mail</span></div>
+    <div class="win-link"><span class="k"><a href="#" id="copy-mail">Copy email address</a></span><span class="v" id="copy-state">copy</span></div>
     <div class="win-link"><span class="k"><a href="https://understandingdigitalculture.substack.com/" target="_blank" rel="noopener">Subscribe on Substack</a></span><span class="v">Understanding Digital Culture</span></div>
 <div class="win-link"><span class="k"><a href="https://github.com/Carson-McKee" target="_blank" rel="noopener">Carson McKee</a></span><span class="v">github</span></div>  </div>
 </div>
@@ -344,6 +345,19 @@
 (function(){
   var a=document.getElementById('mail-link'); if(!a) return;
   a.href='mailto:'+a.getAttribute('data-u')+'@'+a.getAttribute('data-d')+'?subject=The%20Post-Industrial%20School';
+})();
+
+(function(){
+  var b=document.getElementById('copy-mail'), st=document.getElementById('copy-state'), m=document.getElementById('mail-link');
+  if(!b||!m) return;
+  b.addEventListener('click',function(e){
+    e.preventDefault();
+    var addr=m.getAttribute('data-u')+'@'+m.getAttribute('data-d');
+    var done=function(){st.textContent='copied';setTimeout(function(){st.textContent='copy';},2000);};
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(addr).then(done,function(){fallback();});}
+    else fallback();
+    function fallback(){var t=document.createElement('textarea');t.value=addr;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');done();}catch(x){st.textContent=addr;}document.body.removeChild(t);}
+  });
 })();
 </script>
 </body></html>
