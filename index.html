@@ -186,6 +186,9 @@
           <div class="folder" id="f-agenda">
             <div class="ico"><svg viewBox="0 0 78 60"><path d="M3 9 a4 4 0 0 1 4-4 h22 l6 6 h36 a4 4 0 0 1 4 4 v36 a4 4 0 0 1-4 4 H7 a4 4 0 0 1-4-4 Z" fill="#5BA8F2"/><path d="M3 15 h72 v32 a4 4 0 0 1-4 4 H7 a4 4 0 0 1-4-4 Z" fill="#7CC0FA"/></svg></div><div class="lbl">Agenda</div><div class="cnt">2 items</div>
           </div>
+          <div class="folder" id="f-speaking">
+            <div class="ico"><svg viewBox="0 0 78 60"><path d="M3 9 a4 4 0 0 1 4-4 h22 l6 6 h36 a4 4 0 0 1 4 4 v36 a4 4 0 0 1-4 4 H7 a4 4 0 0 1-4-4 Z" fill="#5BA8F2"/><path d="M3 15 h72 v32 a4 4 0 0 1-4 4 H7 a4 4 0 0 1-4-4 Z" fill="#7CC0FA"/></svg></div><div class="lbl">Speaking</div><div class="cnt">2 items</div>
+          </div>
         </div>
       </div>
       <div class="hero-right">
@@ -310,6 +313,11 @@
   <div class="content"><div class="win-link"><span class="k"><a href="https://www.tumblr.com/functional-aesthetic" target="_blank" rel="noopener">functional-aesthetic</a></span><span class="v">Tumblr</span></div><div class="win-link"><span class="k"><a href="https://carson-mckee.github.io/luck-surface-area-revised/" target="_blank" rel="noopener">Luck Surface Area_Revised</a></span><span class="v">ARC Fund Research</span></div></div>
 </div>
 
+<div class="win" id="w-speaking" style="left:58%;top:38%;">
+  <div class="bar2" data-drag><div class="dots"><span class="dot r" data-close></span><span class="dot y"></span><span class="dot g"></span></div><span class="wtitle">Speaking</span></div>
+  <div class="content"><div class="win-link"><span class="k"><a href="speaking/">Talks and workshops</a></span><span class="v">page</span></div><div class="win-link"><span class="k"><a href="#" id="speak-mail">Book a talk</a></span><span class="v">mail</span></div></div>
+</div>
+
 <script>
 (function(){
   function openWin(id){var w=document.getElementById(id);w.classList.add('open');bringFront(w);
@@ -318,6 +326,7 @@
   function bringFront(w){var z=51;document.querySelectorAll('.win').forEach(function(x){var cz=+x.style.zIndex||50;if(cz>=z)z=cz+1;});w.style.zIndex=z;}
   document.getElementById('f-contact').addEventListener('click',function(){openWin('w-contact');});
   document.getElementById('f-agenda').addEventListener('click',function(){openWin('w-agenda');});
+  document.getElementById('f-speaking').addEventListener('click',function(){openWin('w-speaking');});
   document.querySelectorAll('.dot.r[data-close]').forEach(function(d){d.addEventListener('click',function(e){e.stopPropagation();d.closest('.win').classList.remove('open');});});
   // drag
   document.querySelectorAll('.win').forEach(function(w){
@@ -345,6 +354,7 @@
 (function(){
   var a=document.getElementById('mail-link'); if(!a) return;
   a.href='mailto:'+a.getAttribute('data-u')+'@'+a.getAttribute('data-d')+'?subject=The%20Post-Industrial%20School';
+  var sm=document.getElementById('speak-mail'); if(sm) sm.href='mailto:'+a.getAttribute('data-u')+'@'+a.getAttribute('data-d')+'?subject=Speaking%20inquiry';
 })();
 
 (function(){

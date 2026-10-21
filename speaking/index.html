@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Speaking · The Post-Industrial School</title>
+<meta name="description" content="Talks, workshops and advisory from Carson McKee and the Post-Industrial School."/>
+<meta property="og:title" content="Carson McKee · Talks and workshops"/>
+<meta property="og:description" content="Where your luck actually comes from: a talk and workshop built on ARC-funded research."/>
+<meta property="og:type" content="website"/>
+<style>
+@font-face{font-family:"TeX Gyre Heros";src:url("../texgyreheros-regular.woff") format("woff");font-weight:400;font-display:swap;}
+@font-face{font-family:"TeX Gyre Heros";src:url("../texgyreheros-bold.woff") format("woff");font-weight:700;font-display:swap;}
+@font-face{font-family:"Roboto Mono";src:url("../robotomono-regular.woff") format("woff");font-weight:400;font-display:swap;}
+@font-face{font-family:"Roboto Mono";src:url("../robotomono-medium.woff") format("woff");font-weight:500;font-display:swap;}
+
+:root{
+  --paper:#EBF4FB;
+  --ink:#1D1F21;
+  --plot:#0411D9;
+  --grid:#DEEAF4;
+  --grid-strong:#C9DCEA;
+  --grey:#6E7378;
+  --win:#FFFFFF;
+  --winbar:#ECECEE;
+}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:"Roboto Mono",Consolas,monospace;line-height:1.55;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--plot);color:#fff;}
+  a{color:inherit;}
+  .grid-bg{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(var(--grid) 1px,transparent 1px),
+      linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:clamp(60px,9vw,128px) clamp(60px,9vw,128px);
+  }
+  .wrap{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:0 clamp(18px,4vw,56px);}
+
+  /* top bar: ascii face + small label */
+  header.bar{display:flex;justify-content:space-between;align-items:flex-start;padding:24px 0 0;}
+  .face{font-family:"Roboto Mono",Consolas,monospace;font-size:15px;color:var(--plot);letter-spacing:0.05em;}
+  .face{white-space:nowrap;}
+  .barnote{font-family:"TeX Gyre Heros",Arial,sans-serif;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--grey);text-align:right;line-height:1.6;}
+
+  /* ===== HERO ===== */
+  .ascii-art{
+    margin:0;
+    font-family:"Roboto Mono",Consolas,monospace;
+    font-size:clamp(4px,0.72vw,8px);line-height:1.0;letter-spacing:0;
+    color:var(--plot);white-space:pre;pointer-events:none;
+    opacity:0.95;display:block;
+  }
+
+  .desk{position:relative;margin-top:14px;padding-bottom:20px;}
+  /* two-column hero: type left, face right */
+  .hero-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,auto);
+    gap:clamp(20px,4vw,56px);
+    align-items:start;
+  }
+  .hero-left{position:relative;z-index:2;padding-top:clamp(20px,6vw,90px);}
+  .hero-right{position:relative;z-index:1;justify-self:end;}
+
+  /* title stack (now flowed, not absolutely scattered) */
+  .t-serif{font-family:"TeX Gyre Heros",Arial,sans-serif;font-weight:400;letter-spacing:-0.03em;line-height:0.95;}
+  .t-sans{font-family:"TeX Gyre Heros",Arial,sans-serif;line-height:0.9;}
+  .t-bold{font-family:"TeX Gyre Heros",Arial,sans-serif;font-weight:700;letter-spacing:-0.02em;line-height:0.85;}
+  .muted{color:var(--grey);}
+  .ann{font-family:"TeX Gyre Heros",Arial,sans-serif;font-size:clamp(12px,1.4vw,14px);line-height:1.4;color:var(--grey);font-weight:400;letter-spacing:0;max-width:34ch;margin-top:22px;}
+  .h-the{font-size:clamp(15px,1.8vw,20px);display:block;margin-bottom:6px;}
+  .h-post{font-size:clamp(38px,6.4vw,84px);display:block;}
+  .h-school{font-size:clamp(38px,6.4vw,84px);display:block;margin-top:2px;}
+
+  /* folders row under the hero */
+  .folder-row{display:flex;gap:clamp(28px,5vw,60px);margin-top:clamp(30px,5vw,52px);flex-wrap:wrap;}
+  .folder{position:relative;z-index:3;width:96px;text-align:center;cursor:pointer;user-select:none;
+    -webkit-user-select:none;touch-action:manipulation;}
+  .folder .ico{width:78px;height:60px;margin:0 auto;position:relative;filter:drop-shadow(0 2px 3px rgba(0,0,0,.13));transition:transform .12s ease;}
+  .folder:hover .ico{transform:translateY(-2px) scale(1.02);}
+  .folder svg{width:100%;height:100%;display:block;}
+  .folder .lbl{margin-top:7px;font-family:"TeX Gyre Heros",Arial,sans-serif;font-size:13px;font-weight:500;color:var(--ink);}
+  .folder .cnt{font-family:"Roboto Mono",Consolas,monospace;font-size:10px;color:var(--grey);margin-top:1px;}
+
+  @media (max-width:760px){
+    .hero-grid{grid-template-columns:1fr;gap:10px;}
+    .hero-right{justify-self:center;order:-1;width:100%;overflow:hidden;}
+    .ascii-art{font-size:2.9px;line-height:1.0;margin:6px auto 0;text-align:center;}
+    .hero-left{padding-top:8px;}
+    .folder-row{justify-content:flex-start;gap:34px;}
+  }
+
+  /* ===== WINDOWS ===== */
+  .win{position:fixed;z-index:50;width:min(440px,90vw);background:var(--win);
+    border:1px solid #C9CBCE;border-radius:9px;box-shadow:0 18px 50px rgba(20,23,26,.22),0 2px 8px rgba(20,23,26,.12);
+    display:none;flex-direction:column;overflow:hidden;}
+  .win.open{display:flex;}
+  .win .bar2{height:34px;background:var(--winbar);border-bottom:1px solid #D7D8DB;
+    display:flex;align-items:center;padding:0 12px;gap:8px;cursor:grab;}
+  .win .bar2.grabbing{cursor:grabbing;}
+  .dots{display:flex;gap:7px;}
+  .dot{width:12px;height:12px;border-radius:50%;}
+  .dot.r{background:#F5655B;border:1px solid #E14640;cursor:pointer;}
+  .dot.y{background:#F6BE4F;border:1px solid #E0A23B;}
+  .dot.g{background:#62C654;border:1px solid #4FAE43;}
+  .win .wtitle{font-family:"TeX Gyre Heros",Arial,sans-serif;font-size:13px;font-weight:500;color:#3a3d40;
+    position:absolute;left:0;right:0;text-align:center;pointer-events:none;}
+  .win .content{padding:22px;font-family:"Roboto Mono",Consolas,monospace;font-size:13px;line-height:1.65;color:#26292d;max-height:64vh;overflow-y:auto;}
+  .win .content h4{font-family:"TeX Gyre Heros",Arial,sans-serif;text-transform:uppercase;letter-spacing:.04em;
+    font-size:13px;color:var(--grey);margin-bottom:14px;}
+  .win .content a{color:var(--ink);border-bottom:1px solid var(--plot);text-decoration:none;}
+  .win .content a:hover{color:var(--plot);}
+  .win-link{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-top:1px solid var(--grid);}
+  .win-link:first-of-type{border-top:none;}
+  .win-link .k{font-weight:500;color:var(--ink);}
+  .win-link .v{font-family:"Roboto Mono",Consolas,monospace;font-size:12px;color:var(--grey);}
+  .win-empty{font-family:"Roboto Mono",Consolas,monospace;font-size:13px;color:var(--grey);text-align:center;padding:30px 0;}
+
+  /* ===== ESSAY (scrollable, redistributed) ===== */
+  section.block{position:relative;z-index:1;padding:52px 0;border-top:1px solid var(--grid-strong);}
+  .row-label{font-family:"TeX Gyre Heros",Arial,sans-serif;font-size:12px;letter-spacing:0.16em;
+    text-transform:uppercase;color:var(--grey);margin-bottom:20px;display:flex;gap:10px;align-items:center;}
+  .row-label::before{content:"";width:7px;height:7px;background:var(--plot);}
+  /* staggered, desktop-ish column offsets */
+  .lead{font-family:"TeX Gyre Heros",Arial,sans-serif;font-size:clamp(21px,2.9vw,33px);line-height:1.3;max-width:22ch;font-weight:400;letter-spacing:-.005em;}
+  .body-col{margin-top:24px;}
+  .body-col p{font-family:"Roboto Mono",Consolas,monospace;font-size:clamp(13px,1.35vw,15px);line-height:1.7;max-width:64ch;margin-bottom:16px;color:#26292d;}
+  .body-col p:last-child{margin-bottom:0;}
+  .body-col em{font-style:normal;color:var(--plot);font-weight:500;}
+  .indent{margin-left:clamp(0px,12vw,160px);}
+  .indent2{margin-left:clamp(0px,24vw,300px);}
+
+  .entry{display:grid;grid-template-columns:auto 1fr;gap:20px;padding:20px 0;border-top:1px solid var(--grid);}
+  .entry:first-of-type{border-top:none;}
+  .entry .n{font-family:"Roboto Mono",Consolas,monospace;font-size:13px;color:var(--plot);padding-top:5px;}
+  .entry h3{font-family:"TeX Gyre Heros",Arial,sans-serif;font-weight:600;text-transform:uppercase;
+    font-size:clamp(17px,2vw,22px);letter-spacing:.01em;margin-bottom:9px;line-height:1.05;}
+  .entry p{font-family:"Roboto Mono",Consolas,monospace;font-size:clamp(13px,1.3vw,14.5px);line-height:1.7;max-width:64ch;color:#26292d;}
+
+  .turn-head{font-family:"TeX Gyre Heros",Arial,sans-serif;font-size:clamp(28px,5.2vw,58px);line-height:1.0;
+    letter-spacing:-.01em;max-width:17ch;margin-bottom:28px;font-weight:400;}
+  .turn-head .pl{color:var(--plot);}
+
+  footer.foot{position:relative;z-index:1;padding:34px 0 60px;border-top:1px solid var(--grid-strong);
+    display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;}
+  .foot .nm{font-family:"TeX Gyre Heros",Arial,sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:14px;}
+  .foot .me{font-size:13px;color:var(--grey);margin-top:5px;}
+  .foot .yr{font-family:"TeX Gyre Heros",Arial,sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey);}
+
+  /* responsive: collapse scattered desktop into stacked flow on small screens */
+  @media (max-width:760px){
+    .desk{min-height:0;display:flex;flex-direction:column;gap:4px;padding-bottom:20px;}
+    .scatter{position:static!important;left:auto!important;top:auto!important;right:auto!important;}
+    
+    .folder{position:static!important;display:inline-block;margin:14px 18px 0 0;width:84px;}
+    .folder-row{display:flex;flex-wrap:wrap;}
+    .indent,.indent2{margin-left:0;}
+    .h-post,.h-school{font-size:46px;}
+  }
+  @media (prefers-reduced-motion:reduce){.folder:hover .ico{transform:none;}}
+
+  .back{font-family:"TeX Gyre Heros",Arial,sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey);text-decoration:none;border-bottom:1px solid var(--plot);}
+  .back:hover{color:var(--plot);}
+  .sp-hero{padding:clamp(40px,7vw,96px) 0 clamp(36px,5vw,60px);}
+  .sp-hero .h-post{font-size:clamp(40px,7vw,92px);}
+  .talk-title{font-family:"TeX Gyre Heros",Arial,sans-serif;font-size:clamp(28px,4.4vw,52px);line-height:1.02;letter-spacing:-.015em;max-width:18ch;margin-bottom:22px;}
+  .talk-title .pl{color:var(--plot);}
+  .outcomes{list-style:none;margin-top:8px;max-width:64ch;}
+  .outcomes li{font-size:clamp(13px,1.3vw,14.5px);line-height:1.7;padding:12px 0 12px 22px;border-top:1px solid var(--grid);position:relative;color:#26292d;}
+  .outcomes li::before{content:"";position:absolute;left:0;top:20px;width:7px;height:7px;background:var(--plot);}
+  .formats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:30px;}
+  .fmt{background:var(--win);border:1px solid #C9CBCE;border-radius:9px;overflow:hidden;box-shadow:0 2px 8px rgba(20,23,26,.06);}
+  .fmt .bar2{height:30px;background:var(--winbar);border-bottom:1px solid #D7D8DB;display:flex;align-items:center;padding:0 12px;gap:7px;position:relative;}
+  .fmt .dot{width:10px;height:10px;}
+  .fmt .wtitle{font-family:"TeX Gyre Heros",Arial,sans-serif;font-size:12px;font-weight:500;color:#3a3d40;position:absolute;left:0;right:0;text-align:center;}
+  .fmt .content{padding:18px;font-size:13px;line-height:1.65;color:#26292d;}
+  .fmt .len{font-size:11px;color:var(--plot);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;}
+  .fmt h3{font-family:"TeX Gyre Heros",Arial,sans-serif;font-size:19px;font-weight:700;letter-spacing:-.01em;margin-bottom:8px;}
+  .src{margin-top:26px;font-size:13px;color:var(--grey);}
+  .src a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--plot);}
+  .hist{display:grid;grid-template-columns:auto 1fr;gap:0 22px;max-width:72ch;}
+  .hist div{padding:11px 0;border-top:1px solid var(--grid);font-size:clamp(13px,1.3vw,14.5px);}
+  .hist .y{color:var(--plot);font-variant-numeric:tabular-nums;}
+  .book{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;}
+  .btn{font-family:"Roboto Mono",Consolas,monospace;font-size:13px;letter-spacing:.04em;padding:12px 16px;border:1px solid var(--ink);background:var(--win);color:var(--ink);text-decoration:none;cursor:pointer;}
+  .btn.primary{background:var(--plot);border-color:var(--plot);color:#fff;}
+  .btn:hover{border-color:var(--plot);color:var(--plot);}
+  .btn.primary:hover{color:#fff;opacity:.9;}
+  .btn:focus-visible{outline:2px solid var(--plot);outline-offset:2px;}
+  .addr{font-size:13px;color:var(--grey);margin-top:12px;}
+  @media (max-width:1060px){.formats{grid-template-columns:repeat(2,minmax(0,1fr));}}
+  @media (max-width:760px){.formats{grid-template-columns:1fr;}}
+</style></head>
+<body>
+<div class="grid-bg"></div>
+<div class="wrap">
+
+  <header class="bar">
+    <div class="face" aria-label="Post-Industrial School">[ <span id="kao">°□°</span> ]</div>
+    <div class="barnote"><a class="back" href="../">The Post-Industrial School</a></div>
+  </header>
+
+  <div class="sp-hero">
+    <span class="t-sans h-the muted">Carson McKee</span>
+    <span class="t-serif h-post">Talks &amp; Workshops</span>
+    <p class="ann">Carson McKee identifies the systems beneath business and culture.</p>
+  </div>
+
+  <section class="block">
+    <div class="row-label">Current Talk</div>
+    <h2 class="talk-title">Where your luck <span class="pl">actually</span> comes from</h2>
+    <div class="body-col">
+      <p>The standard advice is to post more and tell more people. New research from the Post-Industrial School found that founders spend the most time in the places least able to produce opportunity, and the least time in the places that produce the most. The missing variable is the environment: <em>L = D &times; T &times; e</em>.</p>
+      <p>This talk gives audiences three tests for any space their people spend time in, physical or digital, and a way to redesign where their hours go.</p>
+    </div>
+    <ul class="outcomes">
+      <li>Why proximity, reach and volume don't produce the encounters that lead to opportunity</li>
+      <li>Three tests for any environment: is it bounded, is there a shared task and does it ask for a commitment?</li>
+      <li>A practical audit of where your hours go, and one change to make this month</li>
+    </ul>
+
+    <div class="formats">
+      <div class="fmt"><div class="bar2"><div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div><span class="wtitle">Keynote</span></div>
+        <div class="content"><div class="len">30 to 45 minutes</div><h3>The talk</h3>The finding, the formula and the three tests. For conferences, associations and company events.</div></div>
+      <div class="fmt"><div class="bar2"><div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div><span class="wtitle">Workshop</span></div>
+        <div class="content"><div class="len">90 minutes</div><h3>The Luck Audit</h3>Each person maps where their hours go, finds their inversion and leaves with one change to make this month. For founder cohorts, associations and teams.</div></div>
+      <div class="fmt"><div class="bar2"><div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div><span class="wtitle">Half day</span></div>
+        <div class="content"><div class="len">3.5 hours</div><h3>The Redesign</h3>The team audits its shared environments, from meetings and events to programs and channels, then redesigns them against the three tests and leaves with a plan. For leadership teams, agencies and accelerators.</div></div>
+      <div class="fmt"><div class="bar2"><div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div><span class="wtitle">Advisory</span></div>
+        <div class="content"><div class="len">Project based</div><h3>Designing for encounter</h3>An audit of your programs, events or hybrid-work rituals against the three tests. For coworking operators, accelerators and employers.</div></div>
+    </div>
+    <p class="src">Based on <a href="https://carson-mckee.github.io/luck-surface-area-revised/" target="_blank" rel="noopener">Luck Surface Area_Revised</a>, funded by the Langara College ARC Research Fund. <a href="https://doi.org/10.5281/zenodo.23479711" target="_blank" rel="noopener">DOI</a></p>
+  </section>
+
+  <section class="block">
+    <div class="row-label">Also Speaks On</div>
+    <div class="entry"><div class="n">01</div><div><h3>AI literacy for non-technical teams</h3>
+      <p>How people who don't build AI can use it well, judge its output and fit it into real work.</p></div></div>
+    <div class="entry"><div class="n">02</div><div><h3>Strategy you can defend</h3>
+      <p>How to build a strategy that holds up in the room: the reasoning behind the plan, not just the plan.</p></div></div>
+    <div class="entry"><div class="n">03</div><div><h3>Culture after the industrial order</h3>
+      <p>Why culture keeps recycling its past, what the algorithm can't tell and where the next story is forming.</p></div></div>
+  </section>
+
+  <section class="block">
+    <div class="row-label">Selected Speaking</div>
+    <div class="hist">
+      <div class="y">2026</div><div>DigiMarCon Canada West, Master Class</div>
+      <div class="y">2025</div><div>DigiMarCon Canada West, Keynote and Master Class</div>
+      <div class="y">2025</div><div>Langara College Academic Conference, Speaker</div>
+      <div class="y">2025</div><div>University of British Columbia, Guest Lecture</div>
+      <div class="y">2020</div><div>Sponsorship Space Conference, Panel Moderator</div>
+      <div class="y">2017</div><div>Whistler Bike Digital Marketing Innovation, Speaker</div>
+      <div class="y">2016</div><div>iMedia Conference, Keynote</div>
+      <div class="y">2015</div><div>Retail Advertisers of Canada, Panelist</div>
+      <div class="y">2011</div><div>Canadian Sponsorship Summit, Speaker</div>
+      <div class="y">2010</div><div>Minnesota Wild Corporate Partners Summit, Keynote</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="row-label">Background</div>
+    <div class="body-col">
+      <p>Carson McKee is a digital culture analyst and marketing instructor at Langara College and BCIT, and a former senior strategist at Cult Collective and Major Tom, working with national brands. He runs the Post-Industrial School, sits on the Langara College AI Council and writes <a href="https://understandingdigitalculture.substack.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--plot)">Understanding Digital Culture</a> on Substack.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="row-label">Book a Talk</div>
+    <p class="lead">Tell me about your audience and your date.</p>
+    <div class="book">
+      <a class="btn primary" href="#" id="mail-link" data-u="carson" data-d="understandingdigitalculture.com">Email about speaking</a>
+      <button class="btn" type="button" id="copy-mail">Copy email address</button>
+    </div>
+    <p class="addr" id="copy-state" aria-live="polite"></p>
+  </section>
+
+  <footer class="foot">
+    <div><div class="nm">The Post-Industrial School</div><div class="me">A research program by Carson McKee<br/>Design by <a href="https://www.linkedin.com/in/joynneji/" target="_blank" rel="noopener">Joy Nneji</a></div></div>
+    <div class="yr">Est. 2026</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var el=document.getElementById('kao'); if(!el) return;
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var faces=['°□°','(╯°□°)╯ ┻━┻','┬─┬ノ(°_°ノ)','•_•','(•_•)>⌐■-■','(⌐■_■)','¯\\_(ツ)_/¯','¬_¬','¬‿¬','o_O','⊙_☉','╥_╥','≧▽≦','×_×','・ω・','•_•','-_-','˘ω˘'];
+  var i=0; setInterval(function(){i=(i+1)%faces.length; el.textContent=faces[i];},1100);
+})();
+(function(){
+  var a=document.getElementById('mail-link'),b=document.getElementById('copy-mail'),st=document.getElementById('copy-state');
+  var addr=a.getAttribute('data-u')+'@'+a.getAttribute('data-d');
+  a.href='mailto:'+addr+'?subject=Speaking%20inquiry';
+  b.addEventListener('click',function(){
+    var done=function(){st.textContent='Copied: '+addr;};
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(addr).then(done,fb);}else fb();
+    function fb(){var t=document.createElement('textarea');t.value=addr;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');done();}catch(x){st.textContent=addr;}document.body.removeChild(t);}
+  });
+})();
+</script>
+</body></html>
